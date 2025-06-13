@@ -1,0 +1,25 @@
+# Виртуальное окружение Python
+.venv/
+venv/
+env/
+
+# Файлы кэша Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Временные/лог-файлы
+*.log
+*.tmp
+*.bak
+
+# Системные файлы macOS
+.DS_Store
+
+# Файлы IDE (например, VS Code)
+.vscode/
+.idea/
+
+# Файлы OS или редакторов
+*.swp
+*~
