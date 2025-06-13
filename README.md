@@ -97,3 +97,9 @@ python your_script_name.py
 Artem Grachev<br>
 Дата: 06.2025<br>
 Версия: 1.06.25
+
+## Tags
+
+bruteforce, zip, rar, 7z, password recovery, unlock, python, archive, brute force, script, CLI, unzip, 
+numeric passwords, bruteforce zip password, 7z password cracker, extract encrypted archive, zip rar 7z brute, 
+numeric password unlock
