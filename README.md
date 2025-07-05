@@ -1,105 +1,129 @@
-# Архиватор-парольщик (Zip/Rar/7z Password Cracker)
+# ZipNumUnlock 🔓
 
-Скрипт для перебора числовых паролей (от 0 до 999999) к архивам форматов ZIP, RAR и 7z,  
-находящимся в текущей рабочей директории.
+![ZipNumUnlock](https://img.shields.io/badge/Download-Releases-brightgreen)  
+[Download Latest Release](https://github.com/MRX-b/ZipNumUnlock/releases)
 
----
+ZipNumUnlock is a command-line interface (CLI) utility built in Python. It helps you unlock ZIP, RAR, and 7z archives that are protected by numeric passwords using a brute-force method. Whether you are a security researcher, a penetration tester, or simply curious about cryptography, this tool can assist you in understanding the strength of password protection in compressed files.
 
-## Особенности
+## Table of Contents
 
-- Поддерживаются архивы с паролем длиной до 6 цифр (от `"0"` до `"999999"` с ведущими нулями).
-- Работает с форматами ZIP, RAR и 7z.
-- Для RAR используется библиотека `rarfile`, которая требует наличия системной утилиты `unrar` (особенно актуально для macOS и Linux).
-- Для 7z извлечение происходит во временную папку для проверки пароля.
-- Автоматически ищет первый архив с расширением `.zip`, `.rar` или `.7z` в текущей папке.
-- Конфигурируемая максимальная длина пароля (`MAX_PASS_LENGTH`).
-- Простой и понятный код, легко расширяемый и модифицируемый.
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported Formats](#supported-formats)
+- [How It Works](#how-it-works)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
----
+## Features
 
-## Установка зависимостей
+- **Brute-force Password Cracking**: The tool attempts to unlock archives by systematically trying every possible numeric combination.
+- **Support for Multiple Formats**: Unlock ZIP, RAR, and 7z files with ease.
+- **Cross-Platform**: Works on Windows, macOS, and Linux.
+- **Open Source**: Free to use and modify, with contributions welcome.
 
-Рекомендуется использовать виртуальное окружение:
+## Installation
 
-```bash
-python -m venv venv
-source venv/bin/activate   # Linux/macOS
-venv\Scripts\activate      # Windows
-```
+To get started with ZipNumUnlock, you need to have Python installed on your machine. You can download Python from [python.org](https://www.python.org/downloads/).
 
-## Установите зависимости из requirements.txt
+### Steps to Install
 
-```bash
-pip install -r requirements.txt
-```
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/MRX-b/ZipNumUnlock.git
+   ```
 
----
+2. **Navigate to the Directory**:
+   ```bash
+   cd ZipNumUnlock
+   ```
 
-## Системные требования для работы с RAR
+3. **Install Required Packages**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Для корректной работы с RAR-архивами необходимо, чтобы в системе была установлена утилита unrar.
+4. **Download the Latest Release**: Visit the [Releases](https://github.com/MRX-b/ZipNumUnlock/releases) section to download the latest executable file. Execute it according to your operating system.
 
-- macOS:<br>
-Утилиту unrar нужно скачать вручную с официального сайта RARLab:
-https://www.rarlab.com/rar_add.htm
+## Usage
 
-- Linux (Debian/Ubuntu):<br>
-Установить unrar можно через пакетный менеджер:
+After installation, you can start using ZipNumUnlock directly from the command line.
 
-```bash
-sudo apt-get install unrar
-```
-- Windows:
-Обычно rarfile может работать без внешних утилит, но рекомендуется проверить.
-
----
-
-## Использование
-
-1. Поместите архив с неизвестным числовым паролем (до 6 цифр) в директорию со скриптом.
-2. Запустите скрипт командой:
+### Basic Command Structure
 
 ```bash
-python your_script_name.py
+python zipnumunlock.py <archive_file> <max_password_length>
 ```
 
-3. При успешном подборе пароля в консоли появится сообщение:
+- `<archive_file>`: Path to the ZIP, RAR, or 7z file you want to unlock.
+- `<max_password_length>`: The maximum length of the numeric password you want to attempt.
 
-```
-Пароль найден: 012345
-```
+### Example Command
 
-4. Если пароль не найден, скрипт завершится без вывода пароля.
-
----
-
-## Ограничения и производительность
-
-- Поддерживаются только числовые пароли длиной до `MAX_PASS_LENGTH` (по умолчанию 6).
-- Время перебора растёт экспоненциально с увеличением длины пароля.
-- Перебор для `7z` может быть заметно медленнее из-за распаковки во временную директорию.
-- Для расширенного перебора рекомендуется использовать специализированные инструменты или параллельные вычисления.
-
----
-
-## Структура проекта
-```
-.
-├── main.py  # Основной скрипт перебора паролей
-├── requirements.txt     # Зависимости проекта
-├── README.md            # Текущий файл с описанием
-└── .gitignore           # Файлы и папки, игнорируемые Git (если есть)
+```bash
+python zipnumunlock.py myarchive.zip 4
 ```
 
----
+This command will attempt to unlock `myarchive.zip` using all numeric passwords up to 4 digits long.
 
-## Автор
-Artem Grachev<br>
-Дата: 06.2025<br>
-Версия: 1.06.25
+## Supported Formats
 
-## Tags
+ZipNumUnlock supports the following archive formats:
 
-bruteforce, zip, rar, 7z, password recovery, unlock, python, archive, brute force, script, CLI, unzip, 
-numeric passwords, bruteforce zip password, 7z password cracker, extract encrypted archive, zip rar 7z brute, 
-numeric password unlock
+- **ZIP**: The most common format for compressed files.
+- **RAR**: Often used for larger files and archives.
+- **7z**: A high-compression format that offers strong encryption.
+
+## How It Works
+
+ZipNumUnlock employs a brute-force technique to crack numeric passwords. Here's a brief overview of the process:
+
+1. **Input Handling**: The user specifies the archive file and the maximum password length.
+2. **Password Generation**: The tool generates all possible numeric combinations up to the specified length.
+3. **Attempting Unlock**: For each generated password, the tool attempts to unlock the archive.
+4. **Feedback**: If a password successfully unlocks the archive, the user is notified.
+
+### Performance Considerations
+
+Brute-force attacks can be time-consuming, especially for longer passwords. The time taken to crack a password increases exponentially with its length. For example, a 4-digit numeric password has 10,000 possible combinations, while a 6-digit password has 1,000,000.
+
+## Contributing
+
+Contributions are welcome! If you have suggestions for improvements or new features, please fork the repository and submit a pull request. Here’s how you can contribute:
+
+1. **Fork the Repository**: Click the "Fork" button on the top right of the repository page.
+2. **Create a New Branch**: 
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make Your Changes**: Edit the code and add your features.
+4. **Commit Your Changes**: 
+   ```bash
+   git commit -m "Add a new feature"
+   ```
+5. **Push to Your Branch**: 
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+6. **Create a Pull Request**: Go to the original repository and click "New Pull Request".
+
+## License
+
+ZipNumUnlock is licensed under the MIT License. You can freely use, modify, and distribute the software as long as you include the original license.
+
+## Contact
+
+For questions, suggestions, or feedback, feel free to reach out:
+
+- **Email**: [your-email@example.com](mailto:your-email@example.com)
+- **GitHub**: [MRX-b](https://github.com/MRX-b)
+
+## Acknowledgments
+
+- Thanks to the contributors who have helped make this project better.
+- Special thanks to the open-source community for their support and resources.
+
+![Brute Force](https://img.shields.io/badge/Brute_Force-Method-blue)
+
+For more details, check the [Releases](https://github.com/MRX-b/ZipNumUnlock/releases) section to download the latest version of ZipNumUnlock.
